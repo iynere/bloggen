@@ -1,3 +1,7 @@
+// Copyright 2017 Catherine Jones. All rights reserved.
+// The use of this source code is governed by a 3-clause 
+// BSD-style license as described in the LICENSE file.
+
 package main
 
 import (
