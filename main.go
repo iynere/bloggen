@@ -8,6 +8,7 @@ import (
     "github.com/catherinejones/blog"
     "flag"
     "os"
+    "fmt"
 )
 
 const SITE_CONF = "site.conf"
@@ -30,7 +31,11 @@ func main() {
         os.Exit(0)
     }
 
-    config := blog.LoadConfig(config_path)
+    config, err := blog.LoadConfig(config_path)
+    if nil != err {
+        fmt.Println(err.Error())
+        os.Exit(1)
+    }
 
     config.Options.Clean = clean
 
