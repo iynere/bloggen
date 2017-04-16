@@ -15,26 +15,20 @@ Configuration of the system is stored in a single, JSON encoded file.
 Below is an example:
 
 	{
-		"site": {
+		"macros": {
 		    "title": "My Cute Website",
 		    "root": "https://mycutewebsite.com",
 		    "footer": "My Cute Website is licensed under a CC BY-NC license.",
 		    "lang": "en-ca",
 		    "description": "A website which contains all of my thoughts!"
 		},
-		"system": {
-		    "path": "/srv/sites/teaincodeout/http",
-		    "blog_limit": 6,
-		    "blog_path": "/srv/sites/teaincodeout/http/blog",
-		    "template_path": "/srv/sites/teaincodeout/data/template"
-		}
+        "blog_limit": 6,
+        "blog_path": "blog"
 	}
 
 The system block describes how the system is laid out.
 
-- `path` points to the path in the filesystem that the site is hosted at.
-- `template_path` points to the directory that the templates exist in. All files in this directory will be imported into the templates array.
-- `blog_path` points to the subdirectory that the blog exists in. If not set, no RSS feed or archives page will be generated. 
+- `blog_path` points to the subdirectory in the site root that the blog exists in. If not set, no RSS feed or archives page will be generated. 
 - `blog_limit` specifies the number of blog posts to show on the listing, before the archives.
 
 The site block contains macros that will be used throughout the system. For instance, for the `title` key value, all occurrences of `$TITLE` will be replaced with "My Cute Website".

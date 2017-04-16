@@ -10,24 +10,24 @@ import (
 )
 
 // Render the entire site
-func RenderSite(config *blog.Config) {
-	updated, err := blog.RenderTree(config)
+func RenderSite(context *blog.SiteContext, clean bool) {
+	updated, err := blog.RenderTree(context, clean)
 	if nil != err {
 		log.Print(err.Error())
 	}
 
-	if updated && "" != config.System.BlogPath {
-		err = blog.RenderBlogIndex(config)
+	if updated && "" != context.Config.BlogPath {
+		err = blog.RenderBlogIndex(context)
 		if nil != err {
 			log.Print(err.Error())
 		}
 
-		err = blog.RenderArchives(config)
+		err = blog.RenderArchives(context)
 		if nil != err {
 			log.Print(err.Error())
 		}
 
-		err = blog.RenderFeed(config)
+		err = blog.RenderFeed(context)
 		if nil != err {
 			log.Print(err.Error())
 		}

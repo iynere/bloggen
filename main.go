@@ -12,15 +12,19 @@ import (
 )
 
 const SITE_CONF = "site.conf"
+const SITE_ROOT = "http"
+const SITE_TEMPLATES = "data/templates"
 
 func main() {
 	var clean, help bool
-	var config_path string
+	var config_path, site_path, templates_path string
 
 	flag.BoolVar(&clean, "clean", false, "Rebuild the site from scratch.")
 	flag.BoolVar(&clean, "c", false, "Short form version of -clean.")
 	flag.BoolVar(&help, "help", false, "Display this help text.")
 	flag.BoolVar(&help, "h", false, "Display this help text.")
+	flag.StringVar(&site_path, "site", SITE_ROOT, "The path to the site's document root.")
+	flag.StringVar(&templates_path, "templates", SITE_TEMPLATES, "The path to the site's templates.")
 
 	flag.StringVar(&config_path, "config", SITE_CONF, "The path to the site configuration.")
 
@@ -31,13 +35,11 @@ func main() {
 		os.Exit(0)
 	}
 
-	config, err := blog.LoadConfig(config_path)
+	config, err := blog.NewContext(site_path, templates_path, config_path)
 	if nil != err {
 		fmt.Println(err.Error())
 		os.Exit(1)
 	}
 
-	config.Options.Clean = clean
-
-	RenderSite(config)
+	RenderSite(config, clean)
 }
